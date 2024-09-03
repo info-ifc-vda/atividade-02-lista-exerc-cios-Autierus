@@ -1,69 +1,62 @@
-import java.util.Scanner;
+package lista2;
+import java.util.Random;
 
 public class Exercicio5 {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+    public static void main(String[] args) {        
+        
+        int[][] matriz = new int[7][7];
+        Random random = new Random();
 
-        //Variáveis 
-        int totalDeJogadores = 5 * 11; // total de jogadores 
-        int menorDe18 = 0;
-        double somaIdadePorTime;
-        double somaAlturas = 0;
-        double somaIdades = 0;
-        int acima80kg = 0;
-
-        for (int time = 1; time <= 5; time++){
-            somaIdadePorTime = 0;
-
-            System.out.println("time " + time);
-
-            for (int jogador =1; jogador <= 11; jogador++){
-                System.out.println("Jogador "+ jogador);
-
-                //recebendo a idade dos jagadores
-                System.out.println("Digite a idade do jogador: ");
-                int idade = scan.nextInt();
-                somaIdadePorTime += idade;
-                somaIdades += idade;
-
-                // Verifica se o jogador tem menos de 18 anos
-                if (idade < 18) {
-                    menorDe18++;
-                }
-
-                // Recebe o peso do jogador
-                System.out.print("Digite o peso do jogador (kg): ");
-                double peso = scan.nextDouble();
-
-                // Verifica se o jogador pesa mais de 80 kg
-                if (peso > 80) {
-                    acima80kg++;
-                }
-
-                // Recebe a altura do jogador
-                System.out.print("Digite a altura do jogador (m): ");
-                double altura = scan.nextDouble();
-                somaAlturas += altura;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                matriz[i][j] = random.nextInt(100);
             }
+        }
 
-            // Calcula e mostra a média das idades dos jogadores do time
-            double mediaIdadeTime = somaIdadePorTime / 11.0;
-            System.out.println("Média das idades do Time " + time + ": " + mediaIdadeTime);
+        int[] maiorPorLinha = new int[7];
+        int[] menorPorColuna = new int[7];
+
+        for (int i = 0; i < 7; i++) {
+            int maior = matriz[i][0];
+            for (int j = 1; j < 7; j++) {
+                if (matriz[i][j] > maior) {
+                    maior = matriz[i][j];
+                }
+            }
+            maiorPorLinha[i] = maior;
+        }
+
+        // Calculando o menor elemento de cada coluna
+        for (int j = 0; j < 7; j++) {
+            int menor = matriz[0][j];
+            for (int i = 1; i < 7; i++) {
+                if (matriz[i][j] < menor) {
+                    menor = matriz[i][j];
+                }
+            }
+            menorPorColuna[j] = menor;
+        }
+
+
+        System.out.println("Matriz 7x7:");
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                System.out.print("\t" + matriz[i][j]);
+            }
             System.out.println();
         }
 
-        // Calcula a média das alturas de todos os jogadores do campeonato
-        double mediaAlturaCampeonato = somaAlturas / totalDeJogadores;
+        System.out.println("Maior n�mero de cada linha:");
+        for (int i = 0; i < 7; i++) {
+            System.out.print(maiorPorLinha[i] + " ");
+        }
+        System.out.println();
 
-        // Calcula a porcentagem de jogadores com mais de 80kg
-        double porcentagemJogadoresAcima80kg = (acima80kg / (double) totalDeJogadores) * 100;
-
-        // Mostra os resultados finais
-        System.out.println("Quantidade de jogadores com idade inferior a 18 anos: " + menorDe18);
-        System.out.println("Média das alturas de todos os jogadores do campeonato: " + mediaAlturaCampeonato + " m");
-        System.out.println("Porcentagem de jogadores com mais de 80kg: " + porcentagemJogadoresAcima80kg + "%");
-
-        scan.close();
+        System.out.println("Menor n�mero de cada coluna:");
+        for (int j = 0; j < 7; j++) {
+            System.out.print(menorPorColuna[j] + " ");
+        }
+        System.out.println();
     }
-    
 }
+

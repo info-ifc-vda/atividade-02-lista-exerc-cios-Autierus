@@ -1,27 +1,39 @@
-import javax.swing.JOptionPane;
+package lista2;
 
-public class Exercicio1{
+import java.util.Scanner;
+
+public class Exercicio1 {
     public static void main(String[] args) {
-
-        float imposto = 0, salarioBruto = 0, salarioLiquido = 0;
-
-        // Para digitar o numero de horas trabalhadas
-        float horas = Float.parseFloat(JOptionPane.showInputDialog("Digite a quantidade de horas trabalhadas"));
-
-        // Para digitar o valor da hora trabalhada
-        float valor = Float.parseFloat(JOptionPane.showInputDialog("Digite a valor da hora"));
-
-        //calculo do salário Bruto
-        salarioBruto = horas * valor;
-        JOptionPane.showMessageDialog(null,"Salário bruto: " + salarioBruto);
+        Scanner scanner = new Scanner(System.in);
         
-        //calculo do imposto (30% sálario bruto)
-        imposto = salarioBruto * 0.30f;
-        JOptionPane.showMessageDialog(null,"Imposto de 30% do salário bruto: " + imposto);
+        String cabecalho = "Valor \t Cubo \t Raiz Quadrada";
+        String linha = "---------------------------------------------";
 
-        // salário para receber 
-        salarioLiquido = salarioBruto - imposto;
-        JOptionPane.showMessageDialog(null,"Salário Líquido: " + salarioLiquido);
+        int contadorLinhas = 0;
 
+        System.out.println("Digite valores para a tabela. Digite um n�mero negativo ou 0 para encerrar.");
+
+        while (true) {
+
+            System.out.print("Digite um valor: ");
+            double valor = scanner.nextDouble();
+
+            if (valor <= 0) {
+                break;
+            }
+
+            double cubo = Math.pow(valor, 3);
+            double raizQuadrada = Math.sqrt(valor);
+
+
+            if (contadorLinhas % 20 == 0) {
+                System.out.println("\n" + cabecalho);
+                System.out.println(linha);
+            }
+
+            System.out.printf(valor +"\t"+ cubo +"\t"+ raizQuadrada +"\n");
+            
+            contadorLinhas++;
+        }
     }
 }
